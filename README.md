@@ -5,7 +5,7 @@
 For installing requirements run following command:
 
 ```
-pip -r install requirements.txt
+pip install -r requirements.txt
 ```
 To run the script use:
 __WARNING: You will not be able to recover the files.__
