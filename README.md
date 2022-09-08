@@ -24,7 +24,7 @@ To run the script use:
 __WARNING: You will not be able to recover the files.__
 ```
 # Give permission and run the script
-chmod +x cryptoNix.py
-./cryptoNix.py
+chmod +x cryptonix.py
+./cryptonix.py
 ```
 
