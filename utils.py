@@ -23,7 +23,7 @@ def create_symmetric_key() -> (bytes, str):
     return symmetric_key, key_path
 
 
-def create_asymmetic_key():
+def create_asymmetric_key():
     """
     Generate public and private key
     """
